@@ -15,44 +15,33 @@ body {
   font-family: sans-serif;
   overflow-y: hidden;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-button {
-  background-color: white;
-  padding: 10px 20px;
-  margin: 10px;
-  border-radius: 10px;
-  border: none;
-  appearance: none;
-  font-size: 1.3rem;
-  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12),
-    0px 18px 88px -4px rgba(24, 39, 75, 0.14);
-  transition: transform ease-in 0.1s;
-}
-
-button:hover {
-  transform: scale(1.05);
-}
-
-li {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  opacity: 1;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.Hello {
+.kanban-board {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.kanban-board-column {
+  margin-right: 15px;
+
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.kanban-board-column > h2 {
+  margin-top: 0;
+}
+
+.kanban-board-column-card {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  margin-bottom: 5px;
+  padding: 5px;
+
 }
