@@ -3,8 +3,8 @@ import { Column } from './Column';
 
 const columns = [
   { name: 'todo', cards: [11, 12] },
-  { name: 'blocked', cards: [11, 12] },
-  { name: 'in progress', cards: [11, 12] },
+  { name: 'blocked', cards: [1, 2] },
+  { name: 'in progress', cards: [15, 16] },
   { name: 'done', cards: [11, 12] },
 ];
 
