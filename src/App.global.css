@@ -41,7 +41,10 @@ body {
 .kanban-board-column-card {
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 3px;
-  margin-bottom: 5px;
   padding: 5px;
+}
 
+.column-drop-zone {
+  min-height: 12px;
+  width: 100%;
 }
