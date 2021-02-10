@@ -48,3 +48,7 @@ body {
   min-height: 12px;
   width: 100%;
 }
+
+.column-drop-zone.hovered {
+  background-color: gray;
+}
