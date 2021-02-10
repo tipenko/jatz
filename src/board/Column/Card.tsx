@@ -2,11 +2,11 @@ import React from 'react';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../../DNDConstants';
 
-const Card = ({ id, source }) => {
+const Card = ({ cardObject, source }) => {
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: ItemTypes.CARD,
-      id,
+      card: cardObject,
       source
     },
     collect: (monitor) => ({
@@ -20,7 +20,7 @@ const Card = ({ id, source }) => {
       style={{ opacity: isDragging ? 0.5 : 1 }}
       className="kanban-board-column-card"
     >
-      {id}
+      {cardObject.content}
     </span>
   );
 };

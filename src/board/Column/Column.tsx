@@ -8,7 +8,7 @@ import { useDrop } from 'react-dnd';
 const getDropZone = (targetName, moveCard) => ({index}) => {
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
-    drop: (item, monitor)=> moveCard(item.id, item.source, targetName, index)
+    drop: ({card, source})=> moveCard(card, source, targetName, index)
   });
 
   return <div className="column-drop-zone" ref={drop}/>
@@ -20,9 +20,9 @@ const ColumnComponent = ({ name, cards, moveCard }) => {
     <div className="kanban-board-column">
       <h2>{name}</h2>
       <DropZone index={0}/>
-      {cards.map((id, index) => (
+      {cards.map((card, index:number) => (
         <>
-        <Card id={id} source={name}/>
+        <Card cardObject={card} source={name}/>
         <DropZone index={index+1}/>
         </>
       ))}
@@ -34,4 +34,4 @@ const mapDispatchToProps = {
   moveCard,
 }
 
-export const Column = connect(null,mapDispatchToProps)(ColumnComponent);
+export const Column = connect(null, mapDispatchToProps)(ColumnComponent);
