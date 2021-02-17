@@ -15,8 +15,12 @@ body {
   font-family: sans-serif;
   overflow-y: hidden;
   display: flex;
+  margin: 0;
 }
 
+#root {
+  margin: 5px;
+}
 .kanban-board {
   width: 100%;
   display: flex;
@@ -51,4 +55,34 @@ body {
 
 .column-drop-zone.hovered {
   background-color: gray;
+}
+
+.modal-overlay {
+  position: fixed;
+  background-color: rgba(255,255,255,0.6);
+  top: 0;
+  bottom: 0;
+  left:0;
+  right: 0;
+}
+
+.modal-window {
+  position: fixed;
+  width: 600px;
+  left: calc(50% - 300px);
+  top: calc(50% - 100px);
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  color: black;
+}
+
+.modal-window-header {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.modal-window-actions {
+  display: flex;
+  flex-direction: column-reverse;
 }

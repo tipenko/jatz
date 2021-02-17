@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import Card from './Card';
 import { moveCard } from '../actionCreators';
@@ -20,7 +20,7 @@ const getDropZone = (targetName, moveCard) => ({ index }) => {
 };
 
 const ColumnComponent = ({ name, cards, moveCard }) => {
-  const DropZone = getDropZone(name, moveCard);
+  const DropZone = useCallback(getDropZone(name, moveCard), [name, moveCard]);
   return (
     <div className="kanban-board-column">
       <h2>{name}</h2>
@@ -36,7 +36,7 @@ const ColumnComponent = ({ name, cards, moveCard }) => {
 };
 
 const mapDispatchToProps = {
-  moveCard,
+  moveCard
 };
 
 export const Column = connect(null, mapDispatchToProps)(ColumnComponent);

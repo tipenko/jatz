@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
+import { Link } from 'react-router-dom';
 import { ItemTypes } from '../../DNDConstants';
 
 const Card = ({ cardObject, source }) => {
@@ -20,7 +21,9 @@ const Card = ({ cardObject, source }) => {
       style={{ opacity: isDragging ? 0.5 : 1 }}
       className="kanban-board-column-card"
     >
-      {cardObject.content}
+      <Link to={`/cardDetails/${cardObject.uid}/`}>
+        {cardObject.content}
+      </Link>
     </span>
   );
 };
