@@ -40,6 +40,7 @@ const CardDetailsModal = ({
       submitCallback={submitCallback}
       title="Mutate Card"
       extraButtons={extraButtons}
+      submitTitle="Update Card"
     >
       <textarea
         className="card-content-textarea"

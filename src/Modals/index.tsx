@@ -5,11 +5,16 @@ import {
   Route,
   useLocation,
 } from 'react-router-dom';
+import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 import CardDetailsModal from './CardDetailsModal';
+import AddCardModal from './AddCardModal';
 
-const Modals = () => {
+const ModalsComponent = ({ state, addingCard }) => {
+  const isAdding = !isEmpty(addingCard);
   return (
     <Fragment>
+      {isAdding && <AddCardModal columnName={addingCard.addingToColumn} />}
       <Router>
         <Route
           path="*/cardDetails/:cardId"
@@ -22,4 +27,9 @@ const Modals = () => {
   );
 };
 
-export default Modals;
+export default connect(
+  ({ modals: { addingCard } }) => ({
+    addingCard,
+  }),
+  null
+)(ModalsComponent);

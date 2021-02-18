@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import Button from '../Button';
 
-const GenericModal = ({ closeCallback, submitCallback, children, title, extraButtons = [] }) => {
+const GenericModal = ({ closeCallback, submitCallback, children, title, extraButtons = [], submitTitle }) => {
   const cancelPropagation = useCallback((event) => event.stopPropagation());
   return (
     <div className="modal-overlay" onClick={closeCallback}>
@@ -15,7 +15,7 @@ const GenericModal = ({ closeCallback, submitCallback, children, title, extraBut
         <div className="modal-window-content">{children}</div>
         <div className="modal-window-actions">
         {extraButtons.map(({title, callback}) => (<Button title={title} onClick={callback}/>))}
-        {submitCallback && <Button title="Update card" onClick={submitCallback}/> }</div>
+        {submitCallback && <Button title={submitTitle} onClick={submitCallback}/> }</div>
       </div>
     </div>
   );
