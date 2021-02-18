@@ -1,5 +1,5 @@
 import find from 'lodash/find';
-import { MOVE_CARD, UPDATE_CARD } from './actionTypes';
+import { MOVE_CARD, UPDATE_CARD, DELETE_CARD } from './actionTypes';
 import filter from 'lodash/filter';
 import CardObject from '../types/CardObject';
 
@@ -36,6 +36,9 @@ const replaceCard = (array, oldCard, newCard) =>
 
     return card;
   });
+
+const deleteCard = (array, cardUid) =>
+  array.filter((card) => card.uid != cardUid);
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -88,6 +91,20 @@ export default (state = initialState, action) => {
 
       return updatedState;
 
+    case DELETE_CARD:
+    debugger;
+      const { cardUid : deletedCardUid } = action.payload;
+
+      const deletedState = state.map((column) => {
+        const cardToMutate = find(column.cards, (card) => card.uid == deletedCardUid);
+        if (!cardToMutate) return column;
+        return {
+          name: column.name,
+          cards: deleteCard(column.cards, deletedCardUid),
+        };
+      });
+
+      return deletedState;
     default:
       return state;
   }

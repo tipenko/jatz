@@ -68,7 +68,6 @@ body {
 
 .modal-window {
   position: fixed;
-  width: 600px;
   left: calc(50% - 300px);
   top: calc(50% - 100px);
   background-color: white;
@@ -79,10 +78,20 @@ body {
 
 .modal-window-header {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 0 5px 0;
 }
 
 .modal-window-actions {
   display: flex;
-  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+
+.card-content-textarea {
+  width: 600px;
+}
+
+.jatz-button {
+  width: auto;
 }
