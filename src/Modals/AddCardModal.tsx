@@ -2,6 +2,8 @@ import React, {useState, useCallback} from 'react';
 import { connect } from 'react-redux';
 import { finishAddCard, cancelAddCard } from '../Board/actionCreators';
 import GenericModal from './GenericModal';
+import generateUid from '../utils/generateUid';
+
 
 const AddCardModalComponent = ({finishAddCard, cancelAddCard, columnName}) => {
   const [content, setContent] = useState("");
@@ -11,7 +13,7 @@ const AddCardModalComponent = ({finishAddCard, cancelAddCard, columnName}) => {
   const closeCallback = useCallback(() => cancelAddCard(), [cancelAddCard]);
 
   const submitCallback = useCallback(()=> {
-    finishAddCard(columnName, 200, content);//todo unix time as id
+    finishAddCard(columnName, generateUid(), content);//todo unix time as id
   }, [finishAddCard, content]);
 
   return (
