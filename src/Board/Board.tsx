@@ -8,11 +8,14 @@ const BoardComponent = ({ columns, setInitialState }) => {
   useEffect(() => {
     load(setInitialState);
   }, []);
+  if (columns) {
+    debugger;
+  }
   return (
     <Fragment>
       <h1> kanban board </h1>
       <div className="kanban-board">
-        {columns.map(({ name, cards }) => (
+        {columns && columns.map(({ name, cards }) => (
           <Column name={name} cards={cards} />
         ))}
       </div>
