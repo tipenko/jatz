@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board>
+  <column name="todo">
+    <card uid="1"> one </card>
+    <card uid="2"> two </card>
+  </column>
+  <column name="blocked">
+    <card uid="3"> three </card>
+    <card uid="4"> four </card>
+  </column>
+  <column name="in progress">
+    <card uid="5"> five </card>
+    <card uid="6"> six </card>
+  </column>
+  <column name="done">
+    <card uid="7"> seven </card>
+    <card uid="8"> eight </card>
+  </column>
+</board>

@@ -4,25 +4,12 @@ import {
   UPDATE_CARD,
   DELETE_CARD,
   FINISH_ADD_CARD,
+  SET_INITIAL_STATE
 } from './actionTypes';
 import filter from 'lodash/filter';
 import CardObject from '../types/CardObject';
 
-const one = new CardObject(1, 'one');
-const two = new CardObject(2, 'two');
-const three = new CardObject(3, 'three');
-const four = new CardObject(4, 'four');
-const five = new CardObject(5, 'five');
-const six = new CardObject(6, 'six');
-const seven = new CardObject(7, 'seven');
-const eight = new CardObject(8, 'eight');
-
-const initialState = [
-  { name: 'todo', cards: [one, two] },
-  { name: 'blocked', cards: [three, four] },
-  { name: 'in progress', cards: [five, six] },
-  { name: 'done', cards: [seven, eight] },
-];
+const initialState = [ ];
 
 const getUidMatcher = (uid, matchNonEqual = false) => (card) =>
   matchNonEqual ? card.uid != uid : card.uid == uid;
@@ -131,7 +118,8 @@ export default (state = initialState, action) => {
         };
       });
       return addedState;
-
+    case SET_INITIAL_STATE:
+      return action.payload;
     default:
       return state;
   }

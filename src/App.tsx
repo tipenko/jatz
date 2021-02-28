@@ -8,6 +8,9 @@ import Modals from './Modals';
 import { Board } from './Board';
 import './App.global.css';
 
+// todo here load from fs our board
+
+
 export default function App() {
   return (
     <Provider store={store}>

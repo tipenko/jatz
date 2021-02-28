@@ -4,7 +4,6 @@ import { finishAddCard, cancelAddCard } from '../Board/actionCreators';
 import GenericModal from './GenericModal';
 import generateUid from '../utils/generateUid';
 
-
 const AddCardModalComponent = ({finishAddCard, cancelAddCard, columnName}) => {
   const [content, setContent] = useState("");
   const changeHandler = useCallback((event) => setContent(event.target.value), [
