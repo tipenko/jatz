@@ -1,18 +1,23 @@
-import React, {useState, useCallback} from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { finishAddCard, cancelAddCard } from '../Board/actionCreators';
 import GenericModal from './GenericModal';
 import generateUid from '../utils/generateUid';
+import TextField from '@material-ui/core/TextField';
 
-const AddCardModalComponent = ({finishAddCard, cancelAddCard, columnName}) => {
-  const [content, setContent] = useState("");
+const AddCardModalComponent = ({
+  finishAddCard,
+  cancelAddCard,
+  columnName,
+}) => {
+  const [content, setContent] = useState('');
   const changeHandler = useCallback((event) => setContent(event.target.value), [
-    setContent
+    setContent,
   ]);
   const closeCallback = useCallback(() => cancelAddCard(), [cancelAddCard]);
 
-  const submitCallback = useCallback(()=> {
-    finishAddCard(columnName, generateUid(), content);//todo unix time as id
+  const submitCallback = useCallback(() => {
+    finishAddCard(columnName, generateUid(), content); //todo unix time as id
   }, [finishAddCard, content]);
 
   return (
@@ -22,10 +27,15 @@ const AddCardModalComponent = ({finishAddCard, cancelAddCard, columnName}) => {
       submitTitle="Add"
       title="Add New Card"
     >
-      <textarea
-        className="card-content-textarea"
+      <TextField
+        multiline
+        label="Description"
+        fullWidth
         value={content}
+        rows={12}
+        autoFocus
         onChange={changeHandler}
+        variant="outlined"
       />
     </GenericModal>
   );
@@ -33,5 +43,5 @@ const AddCardModalComponent = ({finishAddCard, cancelAddCard, columnName}) => {
 
 export default connect(null, {
   finishAddCard,
-  cancelAddCard
+  cancelAddCard,
 })(AddCardModalComponent);

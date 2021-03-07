@@ -13,19 +13,16 @@ body {
     #7a2c9e 129.35%
   );
   font-family: sans-serif;
-  overflow-y: hidden;
-  display: flex;
+  overflow: hidden;
   margin: 0;
 }
 
-#root {
-  margin: 5px;
-}
 .kanban-board {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: start;
+  margin: 5px;
 }
 
 .kanban-board-column {
@@ -55,43 +52,4 @@ body {
 
 .column-drop-zone.hovered {
   background-color: gray;
-}
-
-.modal-overlay {
-  position: fixed;
-  background-color: rgba(255,255,255,0.6);
-  top: 0;
-  bottom: 0;
-  left:0;
-  right: 0;
-}
-
-.modal-window {
-  position: fixed;
-  left: calc(50% - 300px);
-  top: calc(50% - 100px);
-  background-color: white;
-  border-radius: 5px;
-  padding: 5px;
-  color: black;
-}
-
-.modal-window-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 5px 0 5px 0;
-}
-
-.modal-window-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.card-content-textarea {
-  width: 600px;
-}
-
-.jatz-button {
-  width: auto;
 }

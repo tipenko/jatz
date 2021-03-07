@@ -1,23 +1,35 @@
-import React, { useCallback } from 'react';
-import Button from '../Button';
+import React from 'react';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
 
-const GenericModal = ({ closeCallback, submitCallback, children, title, extraButtons = [], submitTitle }) => {
-  const cancelPropagation = useCallback((event) => event.stopPropagation());
+const GenericModal = ({
+  closeCallback,
+  submitCallback,
+  children,
+  title,
+  extraButtons = [],
+  submitTitle,
+}) => {
   return (
-    <div className="modal-overlay" onClick={closeCallback}>
-      <div className="modal-window" onClick={cancelPropagation}>
-        <div className="modal-window-header">
-          <div className="modal-window-header-title"> {title} </div>
-          <div className="modal-window-close-btn">
-            <Button onClick={closeCallback} title="X"/>
-          </div>
-        </div>
-        <div className="modal-window-content">{children}</div>
-        <div className="modal-window-actions">
-        {extraButtons.map(({title, callback}) => (<Button title={title} onClick={callback}/>))}
-        {submitCallback && <Button title={submitTitle} onClick={submitCallback}/> }</div>
-      </div>
-    </div>
+    <Dialog open={true} onClose={closeCallback}>
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent>{children}</DialogContent>
+      <DialogActions>
+        {extraButtons.map(({ title, callback }) => (
+          <Button color="primary" onClick={callback}>
+            {title}
+          </Button>
+        ))}
+        {submitCallback && (
+          <Button onClick={submitCallback} color="primary">
+            {submitTitle}
+          </Button>
+        )}
+      </DialogActions>
+    </Dialog>
   );
 };
 

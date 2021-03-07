@@ -17,20 +17,20 @@ export const moveCard = _r(MOVE_CARD, (card, source, target, index) => ({
   card,
   source,
   target,
-  index
+  index,
 }));
 
 export const updateCard = _r(UPDATE_CARD, (cardUid, nextContent) => ({
   cardUid,
-  nextContent
+  nextContent,
 }));
 
 export const deleteCard = _r(DELETE_CARD, (cardUid) => ({
-  cardUid
+  cardUid,
 }));
 
 export const addCard = _r(ADD_CARD, (columnName) => ({
-  columnName
+  columnName,
 }));
 
 export const finishAddCard = _r(
@@ -38,7 +38,7 @@ export const finishAddCard = _r(
   (columnName, uid, content) => ({
     uid,
     content,
-    columnName
+    columnName,
   })
 );
 

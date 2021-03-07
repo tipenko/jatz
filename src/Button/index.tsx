@@ -1,5 +1,14 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
-const Button = ({onClick, title}) => <button className="jatz-button" onClick={onClick}> {title} </button>;
+const JatzButton = ({ onClick, title, color = 'primary' }) => {
+  return (
+    <Button onClick={onClick} variant="contained" color={color}>
+      {title}
+    </Button>
+  );
+};
 
-export default Button;
+//<button className="jatz-button" onClick={onClick}> {title} </button>;
+
+export default JatzButton;

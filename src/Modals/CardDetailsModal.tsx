@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 import GenericModal from './GenericModal';
 import { connect } from 'react-redux';
 import { updateCard, deleteCard } from '../Board/actionCreators';
+import TextField from '@material-ui/core/TextField';
 
 const CardDetailsModal = ({
   cardId,
@@ -24,7 +25,7 @@ const CardDetailsModal = ({
   const extraButtons = useMemo(
     () => [
       {
-        title: 'delete this card',
+        title: 'delete',
         callback: () => {
           deleteCard(cardId);
           history.replace('/');
@@ -38,14 +39,19 @@ const CardDetailsModal = ({
     <GenericModal
       closeCallback={closeCallback}
       submitCallback={submitCallback}
-      title="Mutate Card"
+      title="Update Card"
       extraButtons={extraButtons}
-      submitTitle="Update Card"
+      submitTitle="Update"
     >
-      <textarea
-        className="card-content-textarea"
-        value={value}
+      <TextField
+        multiline
+        autoFocus
+        fullWidth
+        rows={12}
+        label="Description"
         onChange={changeHandler}
+        variant="outlined"
+        value={value}
       />
     </GenericModal>
   );

@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import Card from './Card';
 import { moveCard, addCard } from '../actionCreators';
 import { ItemTypes } from '../../DNDConstants';
-import Button from '../../Button';
 import { useDrop } from 'react-dnd';
+import Typography from '@material-ui/core/Typography';
+
+import IconButton from '@material-ui/core/IconButton';
+import PlusOneIcon from '@material-ui/icons/PlusOne';
+
 
 const getDropZone = (targetName, moveCard) => ({ index }) => {
   const [{ isOver }, drop] = useDrop({
@@ -26,15 +30,21 @@ const ColumnComponent = ({ name, cards, moveCard, addCard }) => {
 
   return (
     <div className="kanban-board-column">
-      <h2>{name}</h2>
+      <Typography variant="h6" gutterBottom>
+        {name}
+      </Typography>
+
+
       <DropZone index={0} />
       {cards.map((card, index: number) => (
         <>
-          <Card cardObject={card} source={name} key={card.uid}/>
-          <DropZone index={index + 1} />
+          <Card cardObject={card} source={name} key={index}/>
+          <DropZone index={index + 1} key={index} />
         </>
       ))}
-      <Button onClick={addCardCallback} title="+"/>
+      <IconButton color="primary" aria-label="add to shopping cart" onClick={addCardCallback}>
+        <PlusOneIcon />
+      </IconButton>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import store from './store';
 import Modals from './Modals';
 import { Board } from './Board';
 import './App.global.css';
-
+import 'fontsource-roboto';
 // todo here load from fs our board
 
 
