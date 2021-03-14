@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, {Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
 import Card from './Card';
 import { moveCard, addCard } from '../actionCreators';
@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 
 import IconButton from '@material-ui/core/IconButton';
 import PlusOneIcon from '@material-ui/icons/PlusOne';
-
 
 const getDropZone = (targetName, moveCard) => ({ index }) => {
   const [{ isOver }, drop] = useDrop({
@@ -29,20 +28,23 @@ const ColumnComponent = ({ name, cards, moveCard, addCard }) => {
   const addCardCallback = useCallback(() => addCard(name));
 
   return (
-    <div className="kanban-board-column">
+    <div className="kanban-board-column" key={'column-div' + name}>
       <Typography variant="h6" gutterBottom>
         {name}
       </Typography>
 
-
       <DropZone index={0} />
       {cards.map((card, index: number) => (
-        <>
-          <Card cardObject={card} source={name} key={index}/>
-          <DropZone index={index + 1} key={index} />
-        </>
+        <Fragment key={index}>
+          <Card cardObject={card} source={name}  />
+          <DropZone index={index + 1}  />
+        </Fragment>
       ))}
-      <IconButton color="primary" aria-label="add to shopping cart" onClick={addCardCallback}>
+      <IconButton
+        color="primary"
+        aria-label="add to shopping cart"
+        onClick={addCardCallback}
+      >
         <PlusOneIcon />
       </IconButton>
     </div>
@@ -51,7 +53,7 @@ const ColumnComponent = ({ name, cards, moveCard, addCard }) => {
 
 const mapDispatchToProps = {
   moveCard,
-  addCard
+  addCard,
 };
 
 export const Column = connect(null, mapDispatchToProps)(ColumnComponent);

@@ -19,7 +19,7 @@ const GenericModal = ({
       <DialogContent>{children}</DialogContent>
       <DialogActions>
         {extraButtons.map(({ title, callback }) => (
-          <Button color="primary" onClick={callback}>
+          <Button key={title} color="primary" onClick={callback}>
             {title}
           </Button>
         ))}

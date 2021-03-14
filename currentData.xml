@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <board>
   <column name="todo">
     <card uid="1"> one </card>
@@ -7,13 +7,15 @@
   <column name="blocked">
     <card uid="3"> three </card>
     <card uid="4"> four </card>
+    <card uid="1615748632349">ebat</card>
   </column>
   <column name="in progress">
     <card uid="5"> five </card>
     <card uid="6"> six </card>
+    <card uid="1615748487235">nahui</card>
   </column>
   <column name="done">
-    <card uid="7"> seven </card>
+    <card uid="7"> seven 7</card>
     <card uid="8"> eight </card>
   </column>
 </board>
