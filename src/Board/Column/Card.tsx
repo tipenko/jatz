@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useDrag } from 'react-dnd';
 import { Link as RouterLink } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
@@ -8,6 +8,28 @@ import Button from '@material-ui/core/Button';
 
 import { ItemTypes } from '../../DNDConstants';
 import Typography from '@material-ui/core/Typography';
+
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+
+const usePersistentHoverCallbacks = () => {
+  const [isHover, setHover] = useState(false);
+  const getListener = useCallback((value) => (event) => setHover(value), [
+    setHover,
+  ]);
+
+  const onHover = useMemo(() => getListener(true), [getListener]);
+  const onLeave = useMemo(() => getListener(false), [getListener]);
+
+  return { onHover, onLeave, isHover };
+};
+
+const useStyles = makeStyles({
+  root: {
+    opacity: (isHover) => (isHover ? '1' : '0.2'),
+    transitionDuration: '0.2s',
+    transitionProperty: 'opacity',
+  },
+});
 
 const JCard = ({ cardObject, source }) => {
   const [{ isDragging }, drag] = useDrag({
@@ -21,13 +43,17 @@ const JCard = ({ cardObject, source }) => {
     }),
   });
 
+  const { onHover, onLeave, isHover } = usePersistentHoverCallbacks();
+
+  const styles = useStyles(isHover);
+
   return (
     <span
       ref={drag}
       style={{ opacity: isDragging ? 0.5 : 1 }}
       className="kanban-board-column-card"
     >
-      <Card>
+      <Card onMouseOver={onHover} onMouseLeave={onLeave}>
         <CardContent>
           <Typography variant="body2" component="p">
             {cardObject.content}
@@ -39,6 +65,7 @@ const JCard = ({ cardObject, source }) => {
             color="primary"
             component={RouterLink}
             to={`/cardDetails/${cardObject.uid}/`}
+            classes={styles}
           >
             EDIT
           </Button>

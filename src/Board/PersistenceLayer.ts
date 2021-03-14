@@ -8,26 +8,38 @@ const builder = new xml2js.Builder();
 
 export const load = (setInitialState) => {
   //TODO if not found, go to defaultBoard.xml
-  fs.readFile(__dirname + '/../currentData.xml', function (err, data) {
-    parser.parseString(data, function (err, result) {
-      const columns = result.board.column;
-      const initialState = map(columns, (column) => {
-        const name = column['$']['name'];
-        const cardsFromXml = column['card'];
-        const cards = map(cardsFromXml, (cardItem) => {
-          const uid = cardItem['$']['uid'];
-          const textContent = cardItem['_'];
-          return new CardObject(uid, textContent);
-        });
 
-        return {
-          name,
-          cards,
-        };
+  fs.access(
+    __dirname + '/../currentData.xml',
+    fs.constants.F_OK,
+    (currentFileExistsError) => {
+      const fileName =
+        __dirname +
+        (currentFileExistsError
+          ? '/../defaultBoard.xml'
+          : '/../currentData.xml');
+      fs.readFile(fileName, function (err, data) {
+        parser.parseString(data, function (err, result) {
+          const columns = result.board.column;
+          const initialState = map(columns, (column) => {
+            const name = column['$']['name'];
+            const cardsFromXml = column['card'];
+            const cards = map(cardsFromXml, (cardItem) => {
+              const uid = cardItem['$']['uid'];
+              const textContent = cardItem['_'];
+              return new CardObject(uid, textContent);
+            });
+
+            return {
+              name,
+              cards,
+            };
+          });
+          setInitialState(initialState);
+        });
       });
-      setInitialState(initialState);
-    });
-  });
+    }
+  );
 };
 
 export const save = (dispatch, getState) => {
@@ -37,7 +49,6 @@ export const save = (dispatch, getState) => {
       column: map(columns, ({ name, cards }) => ({
         $: { name },
         card: map(cards, ({ uid, content }) => ({
-          // cardObject
           _: content,
           $: { uid },
         })),
@@ -52,5 +63,4 @@ export const save = (dispatch, getState) => {
       console.log('an error happened', err);
     }
   });
-  //TODO write our xml to file with proper name
 };
