@@ -25,11 +25,17 @@ const usePersistentHoverCallbacks = () => {
 
 const useStyles = makeStyles({
   root: {
-    opacity: (isHover) => (isHover ? '1' : '0.2'),
+    opacity: (isHover) => (isHover ? '1' : '0'),
     transitionDuration: '0.2s',
     transitionProperty: 'opacity',
   },
 });
+
+/*const useStylesForCard = makeStyles({
+  root: {
+     paddingBottom: 0
+  },
+});*/
 
 const JCard = ({ cardObject, source }) => {
   const [{ isDragging }, drag] = useDrag({
@@ -46,6 +52,7 @@ const JCard = ({ cardObject, source }) => {
   const { onHover, onLeave, isHover } = usePersistentHoverCallbacks();
 
   const styles = useStyles(isHover);
+  //const stylesCard = useStylesForCard();
 
   return (
     <span
@@ -53,7 +60,7 @@ const JCard = ({ cardObject, source }) => {
       style={{ opacity: isDragging ? 0.5 : 1 }}
       className="kanban-board-column-card"
     >
-      <Card onMouseOver={onHover} onMouseLeave={onLeave}>
+      <Card onMouseOver={onHover} onMouseLeave={onLeave} >
         <CardContent>
           <Typography variant="body2" component="p">
             {cardObject.content}

@@ -1,8 +1,9 @@
-import React, { Fragment, useEffect, useCallback } from 'react';
+import React, { Fragment, useEffect, useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 import { setInitialState } from './actionCreators';
 import { save } from './PersistenceLayer';
 import { Column } from './Column';
+import useDrawer from '../Drawer';
 import { load } from './PersistenceLayer';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
@@ -29,15 +30,19 @@ const BoardComponent = ({ columns, setInitialState, save }) => {
 
   const classes = useStyles();
 
+  const { renderDrawer, open } = useDrawer();
+
   return (
     <Fragment>
       <AppBar position="static">
         <Toolbar variant="dense">
+          {renderDrawer()}
           <IconButton
             edge="start"
             color="inherit"
             aria-label="menu"
             className={classes.menuButton}
+            onClick={open}
           >
             <MenuIcon />
           </IconButton>

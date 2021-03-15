@@ -3,19 +3,20 @@
   <column name="todo">
     <card uid="1"> one </card>
     <card uid="2"> two </card>
+    <card uid="1615750493705">ninety</card>
   </column>
   <column name="blocked">
     <card uid="3"> three </card>
+    <card uid="1615748487235">nahui v pizdu</card>
     <card uid="4"> four </card>
     <card uid="1615748632349">ebat</card>
   </column>
   <column name="in progress">
-    <card uid="5"> five </card>
+    <card uid="5"> five 77</card>
     <card uid="6"> six </card>
-    <card uid="1615748487235">nahui</card>
+    <card uid="8"> eight </card>
   </column>
   <column name="done">
-    <card uid="7"> seven 7</card>
-    <card uid="8"> eight </card>
+    <card uid="1615822262119">new done card</card>
   </column>
 </board>
