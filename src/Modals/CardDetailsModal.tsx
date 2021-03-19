@@ -28,7 +28,7 @@ const CardDetailsModal = ({
         title: 'delete',
         callback: () => {
           deleteCard(cardId);
-          history.replace('/');
+          history.replace('/kanban');
         },
       },
     ],

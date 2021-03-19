@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme) => ({
 
 const BoardComponent = ({ columns, setInitialState, save }) => {
   useEffect(() => {
-    load(setInitialState);
+    if (!columns) {
+      load(setInitialState);
+    }
   }, []);
 
   const classes = useStyles();

@@ -52,7 +52,6 @@ const JCard = ({ cardObject, source }) => {
   const { onHover, onLeave, isHover } = usePersistentHoverCallbacks();
 
   const styles = useStyles(isHover);
-  //const stylesCard = useStylesForCard();
 
   return (
     <span
@@ -71,7 +70,7 @@ const JCard = ({ cardObject, source }) => {
             size="small"
             color="primary"
             component={RouterLink}
-            to={`/cardDetails/${cardObject.uid}/`}
+            to={`kanban/cardDetails/${cardObject.uid}`}
             classes={styles}
           >
             EDIT

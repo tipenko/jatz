@@ -7,8 +7,6 @@ const parser = new xml2js.Parser();
 const builder = new xml2js.Builder();
 
 export const load = (setInitialState) => {
-  //TODO if not found, go to defaultBoard.xml
-
   fs.access(
     __dirname + '/../currentData.xml',
     fs.constants.F_OK,

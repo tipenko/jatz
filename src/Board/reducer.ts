@@ -9,7 +9,7 @@ import {
 import filter from 'lodash/filter';
 import CardObject from '../types/CardObject';
 
-const initialState = [ ];
+const defaultState = false;
 
 const getUidMatcher = (uid, matchNonEqual = false) => (card) =>
   matchNonEqual ? card.uid != uid : card.uid == uid;
@@ -32,7 +32,7 @@ const replaceCard = (array, oldCard, newCard) =>
 const deleteCard = (array, cardUid) =>
   array.filter((card) => card.uid != cardUid);
 
-export default (state = initialState, action) => {
+export default (state = defaultState, action) => {
   switch (action.type) {
     case MOVE_CARD:
       const { source, card, target, index } = action.payload;

@@ -3,7 +3,6 @@ import {
   HashRouter as Router,
   Switch,
   Route,
-  useLocation,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
@@ -12,6 +11,7 @@ import AddCardModal from './AddCardModal';
 
 const ModalsComponent = ({ state, addingCard }) => {
   const isAdding = !isEmpty(addingCard);
+
   return (
     <Fragment>
       {isAdding && <AddCardModal columnName={addingCard.addingToColumn} />}
