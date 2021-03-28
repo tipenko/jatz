@@ -2,6 +2,7 @@ import xml2js from 'xml2js';
 import fs from 'fs';
 import map from 'lodash/map';
 import CardObject from '../types/CardObject';
+import LogEvent from '../types/LogEvent';
 
 const parser = new xml2js.Parser();
 const builder = new xml2js.Builder();
@@ -25,7 +26,15 @@ export const load = (setInitialState) => {
             const cards = map(cardsFromXml, (cardItem) => {
               const uid = cardItem['$']['uid'];
               const textContent = cardItem['_'];
-              return new CardObject(uid, textContent);
+              const logRecordsFromXml = cardItem['logRecord'];
+              const logRecords = map(logRecordsFromXml, (logRecord) => {
+                const time = logRecord['$']['time'] - 0;
+                const type = logRecord['$']['type'];
+                const extrasFromXml = logRecord.extra;
+                return new LogEvent(time, type, extrasFromXml);
+              });
+
+              return new CardObject(uid, textContent, logRecords);
             });
 
             return {
@@ -46,9 +55,15 @@ export const save = (dispatch, getState) => {
     board: {
       column: map(columns, ({ name, cards }) => ({
         $: { name },
-        card: map(cards, ({ uid, content }) => ({
+        card: map(cards, ({ uid, content, logRecords }) => ({
           _: content,
           $: { uid },
+          logRecord: map(logRecords, ({ time, type, extras }) => ({
+            $: { time, type },
+            extra: map(extras, (extra) => ({
+              _: extra,
+            })),
+          })),
         })),
       })),
     },

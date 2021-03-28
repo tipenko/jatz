@@ -4,10 +4,10 @@ import {
   UPDATE_CARD,
   DELETE_CARD,
   FINISH_ADD_CARD,
-  SET_INITIAL_STATE
+  SET_INITIAL_STATE,
 } from './actionTypes';
 import filter from 'lodash/filter';
-import CardObject from '../types/CardObject';
+import CardObject, {addLogRecord} from '../types/CardObject';
 
 const defaultState = false;
 
@@ -32,10 +32,12 @@ const replaceCard = (array, oldCard, newCard) =>
 const deleteCard = (array, cardUid) =>
   array.filter((card) => card.uid != cardUid);
 
-export default (state = defaultState, action) => {
-  switch (action.type) {
+export default (state = defaultState, { type, payload, eventLogRecord }) => {
+  console.log('state is', state);
+  const add = addLogRecord(eventLogRecord);
+  switch (type) {
     case MOVE_CARD:
-      const { source, card, target, index } = action.payload;
+      const { source, card, target, index } = payload;
       const isReordering = source == target;
 
       const nextState = state.map((item) => {
@@ -58,7 +60,7 @@ export default (state = defaultState, action) => {
         } else if (item.name == target) {
           return {
             name: item.name,
-            cards: insertCardInPosition(item.cards, card, index),
+            cards: insertCardInPosition(item.cards, add(card), index),
           };
         } else return item;
       });
@@ -66,7 +68,7 @@ export default (state = defaultState, action) => {
       return nextState;
 
     case UPDATE_CARD:
-      const { cardUid, nextContent } = action.payload;
+      const { cardUid, nextContent } = payload;
 
       const updatedState = state.map((column) => {
         const cardToMutate = find(column.cards, (card) => card.uid == cardUid);
@@ -76,7 +78,7 @@ export default (state = defaultState, action) => {
           cards: replaceCard(
             column.cards,
             cardToMutate,
-            new CardObject(cardToMutate.uid, nextContent)
+            add(new CardObject(cardToMutate.uid, nextContent, cardToMutate.logRecords))
           ),
         };
       });
@@ -84,7 +86,7 @@ export default (state = defaultState, action) => {
       return updatedState;
 
     case DELETE_CARD:
-      const { cardUid: deletedCardUid } = action.payload;
+      const { cardUid: deletedCardUid } = payload;
 
       const deletedState = state.map((column) => {
         const cardToMutate = find(
@@ -105,7 +107,7 @@ export default (state = defaultState, action) => {
         uid: addingUid,
         content: addingContent,
         columnName: addingToColumn,
-      } = action.payload;
+      } = payload;
 
       const addedState = state.map((column) => {
         if (column.name != addingToColumn) {
@@ -114,12 +116,12 @@ export default (state = defaultState, action) => {
 
         return {
           name: column.name,
-          cards: column.cards.concat(new CardObject(addingUid, addingContent)),
+          cards: column.cards.concat(new CardObject(addingUid, addingContent, [eventLogRecord])),
         };
       });
       return addedState;
     case SET_INITIAL_STATE:
-      return action.payload;
+      return payload;
     default:
       return state;
   }
