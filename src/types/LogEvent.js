@@ -7,16 +7,29 @@ export default class LogEvent {
     this.extras = extras;
   }
 
-  getText() {
+  getShortText() {
     const [first, second, third] = this.extras;
 
     switch (this.type) {
       case MOVE_CARD:
-        return `moved to ${second}`;
+        return second;
       case UPDATE_CARD:
         return `updated`;
       case FINISH_ADD_CARD:
         return `created`;
+    }
+  }
+
+  getLongText() {
+    const [first, second, third] = this.extras;
+
+    switch (this.type) {
+      case MOVE_CARD:
+        return `was moved from ${first} to ${second}`;
+      case UPDATE_CARD:
+        return `content was set to ${first}`;
+      case FINISH_ADD_CARD:
+        return `this card was created`;
     }
   }
 }

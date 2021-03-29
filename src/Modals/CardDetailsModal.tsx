@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   historyContainer: {
-    minWidth: 300,
+    minWidth: 400,
   },
 }));
 

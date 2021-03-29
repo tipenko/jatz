@@ -73,7 +73,7 @@
   </column>
   <column name="in progress">
     <card uid="6">
-      <content>six 911</content>
+      <content>six 9116</content>
       <logRecord time="1616961914831" type="updateCard">
         <extra> six 9</extra>
       </logRecord>
@@ -85,6 +85,9 @@
       <logRecord time="1617014712611" type="updateCard">
         <extra>six 911</extra>
       </logRecord>
+      <logRecord time="1617044168289" type="updateCard">
+        <extra>six 9116</extra>
+      </logRecord>
     </card>
   </column>
   <column name="done">
@@ -92,23 +95,14 @@
       <content>new done card 3</content>
     </card>
     <card uid="8">
-      <content>
-
-
-
-       eight
-
-
-
-
-
-
-      
-    </content>
+      <content>eight</content>
       <logRecord time="1616961691630" type="moveCard">
         <extra>in progress</extra>
         <extra>done</extra>
         <extra>2</extra>
+      </logRecord>
+      <logRecord time="1617043116765" type="updateCard">
+        <extra>eight</extra>
       </logRecord>
     </card>
   </column>
