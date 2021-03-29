@@ -2,33 +2,19 @@ import React, { useState, useCallback, useMemo } from 'react';
 import GenericModal from './GenericModal';
 import { connect } from 'react-redux';
 import { updateCard, deleteCard } from '../Board/actionCreators';
+import LogEventTimeline from '../LogEventTimeline/index';
+
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-
-import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem from '@material-ui/lab/TimelineItem';
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
-import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineDot from '@material-ui/lab/TimelineDot';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
   historyContainer: {
-    minWidth: 150,
+    minWidth: 300,
   },
 }));
-
-const useStylesForMuiTimeline = makeStyles(
-  {
-    missingOppositeContent: {
-      '&::before': { content: 'none' },
-    },
-  },
-  { name: 'MuiTimelineItem' }
-);
 
 const CardDetailsModal = ({
   cardId,
@@ -62,7 +48,8 @@ const CardDetailsModal = ({
   );
 
   const classes = useStyles();
-  const classes2 = useStylesForMuiTimeline();
+
+  if (!card) return null;
 
   return (
     <GenericModal
@@ -84,28 +71,7 @@ const CardDetailsModal = ({
           value={value}
         />
         <div className={classes.historyContainer}>
-          <Timeline>
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot />
-                <TimelineConnector />
-              </TimelineSeparator>
-              <TimelineContent>Eat</TimelineContent>
-            </TimelineItem>
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot />
-                <TimelineConnector />
-              </TimelineSeparator>
-              <TimelineContent>Code</TimelineContent>
-            </TimelineItem>
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot />
-              </TimelineSeparator>
-              <TimelineContent>Sleep</TimelineContent>
-            </TimelineItem>
-          </Timeline>
+          <LogEventTimeline logEvents={card.logRecords} />
         </div>
       </div>
     </GenericModal>

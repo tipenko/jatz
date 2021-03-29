@@ -36,22 +36,6 @@
     <card uid="1615748632349">
       <content>ebat</content>
     </card>
-  </column>
-  <column name="in progress">
-    <card uid="6">
-      <content>six 911</content>
-      <logRecord time="1616961914831" type="updateCard">
-        <extra> six 9</extra>
-      </logRecord>
-      <logRecord time="1617014698028" type="updateCard">
-        <extra>six 9
-
-    </extra>
-      </logRecord>
-      <logRecord time="1617014712611" type="updateCard">
-        <extra>six 911</extra>
-      </logRecord>
-    </card>
     <card uid="5">
       <content>five 79</content>
       <logRecord time="1616961689494" type="moveCard">
@@ -79,6 +63,27 @@
       </logRecord>
       <logRecord time="1617014531306" type="updateCard">
         <extra>five 79</extra>
+      </logRecord>
+      <logRecord time="1617037242518" type="moveCard">
+        <extra>in progress</extra>
+        <extra>blocked</extra>
+        <extra>4</extra>
+      </logRecord>
+    </card>
+  </column>
+  <column name="in progress">
+    <card uid="6">
+      <content>six 911</content>
+      <logRecord time="1616961914831" type="updateCard">
+        <extra> six 9</extra>
+      </logRecord>
+      <logRecord time="1617014698028" type="updateCard">
+        <extra>six 9
+
+    </extra>
+      </logRecord>
+      <logRecord time="1617014712611" type="updateCard">
+        <extra>six 911</extra>
       </logRecord>
     </card>
   </column>

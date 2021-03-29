@@ -12,11 +12,11 @@ export default class LogEvent {
 
     switch (this.type) {
       case MOVE_CARD:
-        return `was moved from ${first} to ${second} at index ${third}`;
+        return `moved to ${second}`;
       case UPDATE_CARD:
-        return `content was set to  from ${first}`;
+        return `updated`;
       case FINISH_ADD_CARD:
-        return `card was created`;
+        return `created`;
     }
   }
 }
