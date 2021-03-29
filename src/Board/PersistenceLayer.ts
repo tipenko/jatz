@@ -25,7 +25,7 @@ export const load = (setInitialState) => {
             const cardsFromXml = column['card'];
             const cards = map(cardsFromXml, (cardItem) => {
               const uid = cardItem['$']['uid'];
-              const textContent = cardItem['_'];
+              const textContent = cardItem['content'][0];
               const logRecordsFromXml = cardItem['logRecord'];
               const logRecords = map(logRecordsFromXml, (logRecord) => {
                 const time = logRecord['$']['time'] - 0;
@@ -56,7 +56,7 @@ export const save = (dispatch, getState) => {
       column: map(columns, ({ name, cards }) => ({
         $: { name },
         card: map(cards, ({ uid, content, logRecords }) => ({
-          _: content,
+          content: [{ _: content }],
           $: { uid },
           logRecord: map(logRecords, ({ time, type, extras }) => ({
             $: { time, type },
