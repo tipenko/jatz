@@ -31,12 +31,6 @@ const useStyles = makeStyles({
   },
 });
 
-/*const useStylesForCard = makeStyles({
-  root: {
-     paddingBottom: 0
-  },
-});*/
-
 const JCard = ({ cardObject, source }) => {
   const [{ isDragging }, drag] = useDrag({
     item: {
@@ -59,10 +53,10 @@ const JCard = ({ cardObject, source }) => {
       style={{ opacity: isDragging ? 0.5 : 1 }}
       className="kanban-board-column-card"
     >
-      <Card onMouseOver={onHover} onMouseLeave={onLeave} >
+      <Card onMouseOver={onHover} onMouseLeave={onLeave}>
         <CardContent>
           <Typography variant="body2" component="p">
-            {cardObject.content} + {cardObject.archivationTime}
+            {cardObject.content}
           </Typography>
         </CardContent>
         <CardActions>

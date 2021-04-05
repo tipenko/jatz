@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   historyContainer: {
     minWidth: 400,
+    marginLeft: 20
   },
 }));
 

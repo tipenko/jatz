@@ -91,9 +91,6 @@
     </card>
   </column>
   <column name="done">
-    <card uid="1615822262119">
-      <content>new done card 3</content>
-    </card>
     <card uid="8">
       <content>eight</content>
       <logRecord time="1616961691630" type="moveCard">
@@ -105,7 +102,19 @@
         <extra>eight</extra>
       </logRecord>
     </card>
+    <card uid="1615822262119">
+      <content>new done card 3</content>
+      <logRecord time="1617656512132" type="moveCard">
+        <extra>done</extra>
+        <extra>archived</extra>
+        <extra>0</extra>
+      </logRecord>
+      <logRecord time="1617656516552" type="moveCard">
+        <extra>archived</extra>
+        <extra>done</extra>
+        <extra>1</extra>
+      </logRecord>
+    </card>
   </column>
-   <column name="archived">
-  </column>
+  <column name="archived"/>
 </board>

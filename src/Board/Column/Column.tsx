@@ -1,15 +1,17 @@
-import React, {Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
 import Card from './Card';
 import { moveCard, addCard } from '../actionCreators';
 import { ItemTypes } from '../../DNDConstants';
 import { useDrop } from 'react-dnd';
 import Typography from '@material-ui/core/Typography';
-
 import IconButton from '@material-ui/core/IconButton';
 import PlusOneIcon from '@material-ui/icons/PlusOne';
 
-const getDropZone = (targetName, moveCard) => ({ index }) => {
+const getDropZone = (targetName, moveCard) => ({
+  index,
+  isEmptyColumn = false,
+}) => {
   const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.CARD,
     drop: ({ card, source }) => moveCard(card, source, targetName, index),
@@ -19,13 +21,19 @@ const getDropZone = (targetName, moveCard) => ({ index }) => {
   });
 
   return (
-    <div className={`column-drop-zone ${isOver ? 'hovered' : ''}`} ref={drop} />
+    <div
+      className={`column-drop-zone ${isOver ? 'hovered' : ''} ${
+        isEmptyColumn && 'empty-column'
+      }`}
+      ref={drop}
+    />
   );
 };
 
 const ColumnComponent = ({ name, cards, moveCard, addCard }) => {
   const DropZone = useCallback(getDropZone(name, moveCard), [name, moveCard]);
   const addCardCallback = useCallback(() => addCard(name));
+  const isEmptyColumn = !(cards && cards.length);
 
   return (
     <div className="kanban-board-column" key={'column-div' + name}>
@@ -33,11 +41,11 @@ const ColumnComponent = ({ name, cards, moveCard, addCard }) => {
         {name}
       </Typography>
 
-      <DropZone index={0} />
+      <DropZone index={0} isEmptyColumn={isEmptyColumn} />
       {cards.map((card, index: number) => (
         <Fragment key={index}>
-          <Card cardObject={card} source={name}  />
-          <DropZone index={index + 1}  />
+          <Card cardObject={card} source={name} />
+          <DropZone index={index + 1} />
         </Fragment>
       ))}
       <IconButton
