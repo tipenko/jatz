@@ -13,7 +13,7 @@
     <card uid="1617014228352">
       <content>
       ninety axe
-      
+
     </content>
       <logRecord time="1617014228352" type="finishAddCard"/>
     </card>
@@ -21,7 +21,7 @@
   <column name="blocked">
     <card uid="3">
       <content> three 3
-      
+
     </content>
       <logRecord time="1617008786237" type="updateCard">
         <extra> three 3</extra>
@@ -105,5 +105,7 @@
         <extra>eight</extra>
       </logRecord>
     </card>
+  </column>
+   <column name="archived">
   </column>
 </board>

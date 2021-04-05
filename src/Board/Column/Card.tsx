@@ -62,7 +62,7 @@ const JCard = ({ cardObject, source }) => {
       <Card onMouseOver={onHover} onMouseLeave={onLeave} >
         <CardContent>
           <Typography variant="body2" component="p">
-            {cardObject.content}
+            {cardObject.content} + {cardObject.archivationTime}
           </Typography>
         </CardContent>
         <CardActions>
