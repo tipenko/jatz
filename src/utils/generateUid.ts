@@ -1,3 +1,3 @@
-export default () => {
-  return new Date().getTime();
-};
+import generateTime from './generateTime';
+
+export default generateTime;

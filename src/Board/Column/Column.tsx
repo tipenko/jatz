@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import Card from './Card';
 import { moveCard, addCard } from '../actionCreators';
@@ -7,6 +7,9 @@ import { useDrop } from 'react-dnd';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import PlusOneIcon from '@material-ui/icons/PlusOne';
+import generateTime from '../../utils/generateTime';
+
+const archivationTimeout = 24 * 60 *  60 * 1000;//24hrs
 
 const getDropZone = (targetName, moveCard) => ({
   index,
@@ -34,6 +37,20 @@ const ColumnComponent = ({ name, cards, moveCard, addCard }) => {
   const DropZone = useCallback(getDropZone(name, moveCard), [name, moveCard]);
   const addCardCallback = useCallback(() => addCard(name));
   const isEmptyColumn = !(cards && cards.length);
+  const [currentTime] = useState(generateTime());
+  const notArchiveColumn = name !== 'archived';
+  const filteredCards = useMemo(() => {
+
+    if (notArchiveColumn) {
+      return cards;
+    }
+
+    return cards.filter((card) => {
+      const archivationTime = card.archivationTime || 0;
+      const difference = currentTime - archivationTime;
+      return difference < archivationTimeout;
+    });
+  }, [name, cards, currentTime]);
 
   return (
     <div className="kanban-board-column" key={'column-div' + name}>
@@ -42,19 +59,21 @@ const ColumnComponent = ({ name, cards, moveCard, addCard }) => {
       </Typography>
 
       <DropZone index={0} isEmptyColumn={isEmptyColumn} />
-      {cards.map((card, index: number) => (
+      {filteredCards.map((card, index: number) => (
         <Fragment key={index}>
           <Card cardObject={card} source={name} />
           <DropZone index={index + 1} />
         </Fragment>
       ))}
-      <IconButton
-        color="primary"
-        aria-label="add to shopping cart"
-        onClick={addCardCallback}
-      >
-        <PlusOneIcon />
-      </IconButton>
+      {notArchiveColumn && (
+        <IconButton
+          color="primary"
+          aria-label="add to shopping cart"
+          onClick={addCardCallback}
+        >
+          <PlusOneIcon />
+        </IconButton>
+      )}
     </div>
   );
 };

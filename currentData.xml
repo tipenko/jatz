@@ -19,14 +19,6 @@
     </card>
   </column>
   <column name="blocked">
-    <card uid="3">
-      <content> three 3
-
-    </content>
-      <logRecord time="1617008786237" type="updateCard">
-        <extra> three 3</extra>
-      </logRecord>
-    </card>
     <card uid="1615748487235">
       <content>nahui v pizdu</content>
     </card>
@@ -72,6 +64,44 @@
     </card>
   </column>
   <column name="in progress">
+    <card uid="3">
+      <content> three 3
+
+    </content>
+      <logRecord time="1617008786237" type="updateCard">
+        <extra> three 3</extra>
+      </logRecord>
+      <logRecord time="1618078776411" type="moveCard">
+        <extra>blocked</extra>
+        <extra>in progress</extra>
+        <extra>0</extra>
+      </logRecord>
+    </card>
+  </column>
+  <column name="done">
+    <card uid="1615822262119">
+      <content>new done card 3</content>
+      <logRecord time="1617656512132" type="moveCard">
+        <extra>done</extra>
+        <extra>archived</extra>
+        <extra>0</extra>
+      </logRecord>
+      <logRecord time="1617656516552" type="moveCard">
+        <extra>archived</extra>
+        <extra>done</extra>
+        <extra>1</extra>
+      </logRecord>
+      <logRecord time="1618078293094" type="moveCard">
+        <extra>done</extra>
+        <extra>archived</extra>
+        <extra>1</extra>
+      </logRecord>
+      <logRecord time="1618078299835" type="moveCard">
+        <extra>archived</extra>
+        <extra>done</extra>
+        <extra>0</extra>
+      </logRecord>
+    </card>
     <card uid="6">
       <content>six 9116</content>
       <logRecord time="1616961914831" type="updateCard">
@@ -88,9 +118,14 @@
       <logRecord time="1617044168289" type="updateCard">
         <extra>six 9116</extra>
       </logRecord>
+      <logRecord time="1618078755932" type="moveCard">
+        <extra>in progress</extra>
+        <extra>done</extra>
+        <extra>1</extra>
+      </logRecord>
     </card>
   </column>
-  <column name="done">
+  <column name="archived">
     <card uid="8">
       <content>eight</content>
       <logRecord time="1616961691630" type="moveCard">
@@ -101,20 +136,46 @@
       <logRecord time="1617043116765" type="updateCard">
         <extra>eight</extra>
       </logRecord>
-    </card>
-    <card uid="1615822262119">
-      <content>new done card 3</content>
-      <logRecord time="1617656512132" type="moveCard">
+      <logRecord time="1618078280918" type="moveCard">
         <extra>done</extra>
+        <extra>in progress</extra>
+        <extra>1</extra>
+      </logRecord>
+      <logRecord time="1618078286360" type="moveCard">
+        <extra>in progress</extra>
         <extra>archived</extra>
         <extra>0</extra>
       </logRecord>
-      <logRecord time="1617656516552" type="moveCard">
+      <logRecord time="1618078343285" type="moveCard">
         <extra>archived</extra>
         <extra>done</extra>
         <extra>1</extra>
       </logRecord>
+      <logRecord time="1618078345563" type="moveCard">
+        <extra>done</extra>
+        <extra>archived</extra>
+        <extra>0</extra>
+      </logRecord>
+      <logRecord time="1618078395022" type="moveCard">
+        <extra>archived</extra>
+        <extra>done</extra>
+        <extra>1</extra>
+      </logRecord>
+      <logRecord time="1618078402763" type="moveCard">
+        <extra>done</extra>
+        <extra>archived</extra>
+        <extra>0</extra>
+      </logRecord>
+      <logRecord time="1618078485663" type="moveCard">
+        <extra>archived</extra>
+        <extra>done</extra>
+        <extra>1</extra>
+      </logRecord>
+      <logRecord time="1618078488080" type="moveCard">
+        <extra>done</extra>
+        <extra>archived</extra>
+        <extra>0</extra>
+      </logRecord>
     </card>
   </column>
-  <column name="archived"/>
 </board>

@@ -14,14 +14,14 @@ const timeMiddleware = ({ dispatch, getState }) => (next) => (action) => {
   const { type } = action;
 
   const wrappedNext = wrapNext(next, action, getCurrentTime());
-  const {
-    payload: { source, target, index, nextContent },
-  } = action;
   switch (type) {
     case MOVE_CARD:
+      const {
+        payload: { source, target, index },
+      } = action;
       return wrappedNext(source, target, index);
     case UPDATE_CARD:
-      return wrappedNext(nextContent);
+      return wrappedNext(action.payload.nextContent);
     case FINISH_ADD_CARD:
       return wrappedNext();
     default:

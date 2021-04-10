@@ -33,7 +33,6 @@ const deleteCard = (array, cardUid) =>
   array.filter((card) => card.uid != cardUid);
 
 export default (state = defaultState, { type, payload, eventLogRecord }) => {
-  console.log('state is', state);
   const add = addLogRecord(eventLogRecord);
   switch (type) {
     case MOVE_CARD:
