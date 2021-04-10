@@ -6,11 +6,14 @@ import CardContent from '@material-ui/core/CardContent';
 import { ItemTypes } from '../../DNDConstants';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import withTitle from '../../utils/withTitle';
 
 const useStyles = makeStyles(() => ({
   routerLink: {
     textDecoration: 'none',
-    color: 'black'
+    color: 'black',
+    maxWidth: '150px',
+    display: 'block'
   },
 }));
 
@@ -41,7 +44,7 @@ const JCard = ({ cardObject, source }) => {
             to={`kanban/cardDetails/${cardObject.uid}`}
             className={styles.routerLink}
           >
-            {cardObject.content}
+            {withTitle(cardObject.content)}
           </Typography>
         </CardContent>
       </Card>

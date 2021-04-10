@@ -14,7 +14,7 @@ const GenericModal = ({
   submitTitle,
 }) => {
   return (
-    <Dialog open={true} onClose={closeCallback}>
+    <Dialog open={true} onClose={closeCallback} maxWidth="lg">
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>{children}</DialogContent>
       <DialogActions>

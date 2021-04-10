@@ -25,9 +25,9 @@ export default class LogEvent {
 
     switch (this.type) {
       case MOVE_CARD:
-        return `was moved from ${first} to ${second}`;
+        return `${first} ➡️ ${second}`;
       case UPDATE_CARD:
-        return `content was set to ${first}`;
+        return `content = ${first}`;
       case FINISH_ADD_CARD:
         return `this card was created`;
     }

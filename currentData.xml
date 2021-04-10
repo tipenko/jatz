@@ -65,9 +65,7 @@
   </column>
   <column name="in progress">
     <card uid="3">
-      <content> three 3
-
-    </content>
+      <content>ну че сделали нормальную ширину наконец хоть</content>
       <logRecord time="1617008786237" type="updateCard">
         <extra> three 3</extra>
       </logRecord>
@@ -76,6 +74,14 @@
         <extra>in progress</extra>
         <extra>0</extra>
       </logRecord>
+      <logRecord time="1618081396327" type="updateCard">
+        <extra>ну че сделали нормальную ширину наконец хоть</extra>
+      </logRecord>
+    </card>
+    <card uid="1618081305901">
+      <content>ехал гитлер через гитлер 
+гитлер гитлер гитлергитлер гитлергитлер  гитлер гитлер</content>
+      <logRecord time="1618081305901" type="finishAddCard"/>
     </card>
   </column>
   <column name="done">

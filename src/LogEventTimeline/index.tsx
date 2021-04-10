@@ -11,6 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import withTitle from '../utils/withTitle';
 
 const format = (time) => dateFormat(time, 'ddd HH:MM');
 
@@ -28,13 +29,14 @@ const LogEventTimeline = ({ logEvents }) => {
     logEvents,
   ]);
 
-  return <TableContainer component={Paper}>
+  return (
+    <TableContainer component={Paper}>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell align="right">Time</TableCell>
             <TableCell align="right">Type</TableCell>
-            <TableCell align="right"> Description</TableCell>
+            <TableCell align="right">Description</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,12 +44,15 @@ const LogEventTimeline = ({ logEvents }) => {
             <TableRow key={logEvent.time}>
               <TableCell align="right">{format(logEvent.time)}</TableCell>
               <TableCell align="right">{logEvent.type}</TableCell>
-              <TableCell align="right">{logEvent.getLongText()}</TableCell>
+              <TableCell align="right">
+                {withTitle(logEvent.getLongText())}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+  );
 };
 
 export default LogEventTimeline;
