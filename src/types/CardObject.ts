@@ -1,6 +1,11 @@
 import filter from 'lodash/filter';
 import sortBy from 'lodash/sortBy';
 import last from 'lodash/last';
+import find from 'lodash/find';
+import head from 'lodash/head';
+import forEach from 'lodash/forEach';
+import getTime from '../utils/generateTime';
+
 import { MOVE_CARD } from '../Board/actionTypes';
 
 export default class CardObject {
@@ -14,17 +19,50 @@ export default class CardObject {
     this.logRecords = logRecords;
   }
 
+  get sortedLogRecords () {
+    return sortBy(this.logRecords, ['time']);
+  }
+
+  get creationLogRecord(){
+    return head(this.sortedLogRecords);
+  }
+
   get archivationTime() {
-    const logRecordsAboutMovedToArchive = filter(this.logRecords, (logRecord) => {
+    const logRecordsAboutMovedToArchive = filter(this.sortedLogRecords, (logRecord) => {
       if (logRecord.type !== MOVE_CARD) {
         return false;
       }
-
-      const [, targetColumn] = logRecord && logRecord.extras || [];
+      //todo get rid of extras
+      const targetColumn = logRecord && logRecord.to;
       return targetColumn == 'archived';
     });
-    const movedToArchiveRecord = last(sortBy(logRecordsAboutMovedToArchive, ['time']));
+    const movedToArchiveRecord = last(logRecordsAboutMovedToArchive);
     return movedToArchiveRecord ? movedToArchiveRecord.time : null;
+  }
+
+  //returns set of pairs [[startTime, endTime]]
+  get workingPeriodsTimes() {
+    const records = this.sortedLogRecords;
+    let result = [];
+    let currentPair;
+    let inProgressState = false;
+    forEach(records, (record) => {
+      if (record.isInProgressStartRecord) {
+        currentPair = [record.time];
+        inProgressState = true;
+      } else if (record.isInProgressEndRecord) {
+        currentPair[1] = [record.time];
+        result.push(currentPair);
+        inProgressState = false;
+      }
+    });
+
+    if (inProgressState) {
+      currentPair[1] = getTime();
+      result.push(currentPair);
+    }
+
+    return result;
   }
 }
 

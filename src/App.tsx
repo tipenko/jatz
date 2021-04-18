@@ -13,6 +13,8 @@
   import Modals from './Modals';
   import { Board } from './Board';
   import Zettelcasten from './Zettelcasten';
+  import Calendar from './Calendar';
+
   import './App.global.css';
   import 'fontsource-roboto';
 
@@ -28,6 +30,7 @@
               </Route>
               <Route path="/kanban" component={Board} />
               <Route path="/zettelcasten" component={Zettelcasten} />
+              <Route path="/calendar" component={Calendar} />
             </Switch>
           </Router>
           <Modals />

@@ -23,7 +23,7 @@ const timeMiddleware = ({ dispatch, getState }) => (next) => (action) => {
     case UPDATE_CARD:
       return wrappedNext(action.payload.nextContent);
     case FINISH_ADD_CARD:
-      return wrappedNext();
+      return wrappedNext(action.payload.columnName);
     default:
       return next(action);
   }

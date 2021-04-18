@@ -8,6 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ViewWeekIcon from '@material-ui/icons/ViewWeek';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import EventIcon from '@material-ui/icons/Event';
 import { useRouteMatch, Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -23,6 +24,7 @@ const useDrawer = () => {
   const styles = useStyles();
   const matchBoard = !!useRouteMatch("/kanban");
   const matchZettelcasten = !!useRouteMatch("/zettelcasten");
+  const matchCalendar = !!useRouteMatch("/calendar");
 
   const renderDrawer = useCallback(
     () => (
@@ -42,6 +44,13 @@ const useDrawer = () => {
                 <AccountTreeIcon />
               </ListItemIcon>
               <ListItemText primary={'Zettelcasten'} />
+            </ListItem>
+
+             <ListItem button component={RouterLink} to={'/calendar'} selected={matchCalendar}>
+              <ListItemIcon>
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Calendar'} />
             </ListItem>
           </List>
         </div>

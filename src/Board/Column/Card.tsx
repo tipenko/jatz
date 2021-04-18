@@ -34,7 +34,7 @@ const JCard = ({ cardObject, source }) => {
   return (
     <span
       ref={drag}
-      style={{ opacity: isDragging ? 0.5 : 1 }}
+      style={{ opacity: isDragging ? 0.5 : 1, transform: isDragging ? "rotateZ(4.8deg)":'' }}
     >
       <Card>
         <CardContent>

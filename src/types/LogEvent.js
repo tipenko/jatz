@@ -8,7 +8,7 @@ export default class LogEvent {
   }
 
   getShortText() {
-    const [first, second, third] = this.extras;
+    const [first, second, third] = this.extras || [];
 
     switch (this.type) {
       case MOVE_CARD:
@@ -20,16 +20,44 @@ export default class LogEvent {
     }
   }
 
-  getLongText() {
-    const [first, second, third] = this.extras;
+  get from() {
+    if (this.type == MOVE_CARD) {
+      return this.extras[0];
+    }
+  }
 
+  get to() {
+    if (this.type == MOVE_CARD) {
+      return this.extras[1];
+    }
+
+    if (this.type == FINISH_ADD_CARD) {
+      return this.extras[0];
+    }
+  }
+
+  get content() {
+    if (this.type == UPDATE_CARD) {
+      return this.extras[0];
+    }
+  }
+
+  get isInProgressStartsRecord() {
+    return this.from != this.to && this.to == 'in progress';
+  }
+
+  get isInProgressEndRecord() {
+    return this.from != this.to && this.from == 'in progress';
+  }
+
+  getLongText() {
     switch (this.type) {
       case MOVE_CARD:
-        return `${first} ➡️ ${second}`;
+        return `${this.from} ➡️ ${this.to}`;
       case UPDATE_CARD:
-        return `content = ${first}`;
+        return `content = ${this.content}`;
       case FINISH_ADD_CARD:
-        return `this card was created`;
+        return `created to ${this.to}`;
     }
   }
 }
