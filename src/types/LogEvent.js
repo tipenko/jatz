@@ -43,7 +43,14 @@ export default class LogEvent {
   }
 
   get isInProgressStartsRecord() {
-    return this.from != this.to && this.to == 'in progress';
+    switch (this.type) {
+      case MOVE_CARD:
+        return this.from != this.to && this.to == 'in progress';
+      case FINISH_ADD_CARD:
+        return this.to == 'in progress';
+      default:
+        return false;
+    }
   }
 
   get isInProgressEndRecord() {

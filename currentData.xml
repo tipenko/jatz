@@ -18,7 +18,40 @@
       </logRecord>
     </card>
   </column>
-  <column name="in progress"/>
+  <column name="in progress">
+    <card uid="1619952928130">
+      <content>leonid volkvo</content>
+      <logRecord time="1619952928130" type="finishAddCard">
+        <extra>in progress</extra>
+      </logRecord>
+      <logRecord time="1619952939781" type="moveCard">
+        <extra>in progress</extra>
+        <extra>done</extra>
+        <extra>2</extra>
+      </logRecord>
+      <logRecord time="1619952973160" type="moveCard">
+        <extra>done</extra>
+        <extra>in progress</extra>
+        <extra>1</extra>
+      </logRecord>
+    </card>
+    <card uid="1619951324027">
+      <content>yuri gagarin</content>
+      <logRecord time="1619951324027" type="finishAddCard">
+        <extra>in progress</extra>
+      </logRecord>
+      <logRecord time="1619952995879" type="moveCard">
+        <extra>in progress</extra>
+        <extra>done</extra>
+        <extra>2</extra>
+      </logRecord>
+      <logRecord time="1619952999509" type="moveCard">
+        <extra>done</extra>
+        <extra>in progress</extra>
+        <extra>1</extra>
+      </logRecord>
+    </card>
+  </column>
   <column name="done">
     <card uid="1618765032059">
       <content>adone
@@ -53,6 +86,9 @@
     </card>
     <card uid="8">
       <content>eight</content>
+      <logRecord time="1616961591630" type="finishAddCard">
+        <extra>in progress</extra>
+      </logRecord>
       <logRecord time="1616961691630" type="moveCard">
         <extra>in progress</extra>
         <extra>done</extra>

@@ -1,9 +1,6 @@
 import React, { Fragment, useMemo, useState, useCallback } from 'react';
-
 import map from 'lodash/map';
 import sortBy from 'lodash/sortBy';
-import dateFormat from 'dateformat';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -13,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import withTitle from '../utils/withTitle';
 
-const format = (time) => dateFormat(time, 'ddd HH:MM');
+import format from '../utils/formatDate';
 
 const MyTimelineItem = ({ logEvent, isLast }) => {
   return (

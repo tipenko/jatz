@@ -55,3 +55,33 @@ body {
 .column-drop-zone.hovered {
   background-color: gray;
 }
+
+.calendar-grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+  "header header header header header header header"
+  "monday tuesday wednesday thursday friday saturday sunday";
+  height: 100%;
+  padding: 10px;
+}
+
+.calendar-header{
+  grid-area: header;
+  padding: 10px;
+}
+
+.calendar-column {
+  height: 100%;
+  min-height: 50px;
+  padding: 5px;
+}
+
+.calendar-event {
+  background-color: lightgray;
+  border: solid gray 1px;
+  border-radius: 3px;
+  padding: 3px;
+  margin-bottom: 3px;
+}
