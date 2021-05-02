@@ -84,4 +84,10 @@ body {
   border-radius: 3px;
   padding: 3px;
   margin-bottom: 3px;
+
 }
+
+.calendar-event>a {
+    text-decoration:none;
+    color:black;
+  }

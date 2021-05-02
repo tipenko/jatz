@@ -1,13 +1,22 @@
-import React, { Fragment, useMemo, useState } from 'react';
+import React, {
+  Fragment,
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import find from 'lodash/find';
+import { setInitialState } from '../Board/actionCreators';
+import { load } from '../Board/PersistenceLayer';
 
 import forEach from 'lodash/forEach';
 import filter from 'lodash/filter';
 import uniq from 'lodash/uniq';
 import reduce from 'lodash/reduce';
-
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import map from 'lodash/map';
-
+import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
@@ -18,7 +27,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import useDrawer from '../Drawer';
 import generateTime from '../utils/generateTime';
-import { formatDate } from '../utils/formatDate';
+import withTitle from '../utils/withTitle';
+import { formatDate, formatTime } from '../utils/formatDate';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -60,13 +70,13 @@ const checkCardInRange = (startMoment, endMoment) => ({
 
 function startOfWeek(date) {
   var diff = date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1);
-  return new Date(new Date(date.setDate(diff)).setHours(0, 0, 0));
+  return new Date(new Date(date.setDate(diff)).setHours(0, 0, 0, 0));
 }
 
 const addDays = (days, date) =>
   new Date(date.getTime() + days * 24 * 60 * 60 * 1000);
 
-const addWeek = (date) => addDays(7, date);
+const addWeek = (date, weekCount = 1) => addDays(7 * weekCount, date);
 
 const cardArrayToSingularCardReference = (start, end) => (cards) =>
   reduce(
@@ -85,20 +95,32 @@ const cardArrayToSingularCardReference = (start, end) => (cards) =>
     []
   );
 
-const Cal = ({ allCards }) => {
+const Cal = ({ allCards, columns, setInitialState }) => {
   const { renderDrawer, open } = useDrawer();
   const classes = useStyles();
-  const [startingMoment, setSm] = useState(
-    startOfWeek(new Date(generateTime()))
-  );
+  const lastMonday = startOfWeek(new Date(generateTime()));
+  const [startingMoment, setSm] = useState(lastMonday);
+
   const endingMoment = useMemo(() => addWeek(startingMoment), [startingMoment]);
+  const incrementWeek = useCallback(
+    () => setSm((currentValue) => addWeek(currentValue)),
+    [setSm]
+  );
+
+  const decrementWeek = useCallback(
+    () => setSm((currentValue) => addWeek(currentValue, -1)),
+    [setSm]
+  );
 
   const thisWeekCards = useMemo(
     () => filter(allCards, checkCardInRange(startingMoment, endingMoment)),
     [startingMoment]
   );
 
-  const columns = useMemo(() => {
+  const isNextDisabled = startingMoment.getTime() === lastMonday.getTime();
+  const isPrevActive = true;
+
+  const eventColumns = useMemo(() => {
     return weekdays.map((name, index) => {
       const dayStart = addDays(index, startingMoment);
       const dayEnd = addDays(index + 1, startingMoment);
@@ -111,6 +133,12 @@ const Cal = ({ allCards }) => {
       };
     });
   }, [thisWeekCards]);
+
+  useEffect(() => {
+    if (!columns) {
+      load(setInitialState);
+    }
+  }, []);
 
   return (
     <Fragment>
@@ -136,13 +164,38 @@ const Cal = ({ allCards }) => {
           <Typography variant="h5">
             {formatDate(startingMoment)} - {formatDate(endingMoment)}
           </Typography>
+          <ButtonGroup
+            variant="text"
+            color="primary"
+            aria-label="text primary button group"
+          >
+            <Button size="small" onClick={decrementWeek}>
+              Prev
+            </Button>
+            <Button
+              size="small"
+              onClick={incrementWeek}
+              disabled={isNextDisabled}
+            >
+              Next
+            </Button>
+          </ButtonGroup>
         </Paper>
 
-        {columns.map(({ name, index, refs }) => (
+        {eventColumns.map(({ name, index, refs }) => (
           <Paper className="calendar-column">
             <Typography variant="subtitle1">{name}</Typography>
             {refs.map(({ range, card }, index) => (
-              <div className="calendar-event">{card.content}</div>
+              <div className="calendar-event">
+                <Typography variant="caption"
+                component={RouterLink}
+                to={`/kanban/cardDetails/${card.uid}`}
+                >
+                {withTitle( `${formatTime(new Date(range[0]))}-${formatTime(
+                    new Date(range[1])
+                  )} ${card.content}` )}
+          </Typography>
+              </div>
             ))}
           </Paper>
         ))}
@@ -162,7 +215,9 @@ const mapStateToProps = (state) => {
     []
   );
 
-  return { allCards };
+  return { allCards, columns };
 };
 
-export default connect(mapStateToProps)(Cal);
+const mapDispatchToProps = { setInitialState };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cal);
