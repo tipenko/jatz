@@ -13,9 +13,17 @@ const useStyles = makeStyles((theme) => ({
   },
   historyContainer: {
     minWidth: 400,
-    marginLeft: 20
+    marginLeft: 20,
+  },
+  inputs: {
+    display: 'grid',
+    gridTemplateRows: '2fr 4ft 4fr',
+    gridGap: '10px',
   },
 }));
+
+const withChangeListener = (callback) => (event) =>
+  callback(event.target.value);
 
 const CardDetailsModal = ({
   cardId,
@@ -24,16 +32,30 @@ const CardDetailsModal = ({
   updateCard,
   deleteCard,
 }) => {
-  const [value, setValue] = useState(card && card.content);
-  const changeHandler = useCallback((event) => setValue(event.target.value), [
-    setValue,
+  const [description, setDescription] = useState(card && card.content);
+  const [shortId, setShortId] = useState(card && card.shortId);
+  const [resolution, setResolution] = useState(card && card.resolution);
+
+  const descriptionChangeHandler = useCallback(
+    withChangeListener(setDescription),
+    [setDescription]
+  );
+
+  const shortIdChangeHandler = useCallback(withChangeListener(setShortId), [
+    setShortId,
   ]);
+
+  const resolutionChangeHandler = useCallback(
+    withChangeListener(setResolution),
+    [setResolution]
+  );
+
   const closeCallback = useCallback(() => history.replace('/'));
   const submitCallback = useCallback(() => {
     //construct and dispatch event that will update our card object
-    updateCard(cardId, value);
+    updateCard(cardId, description, resolution, shortId);
     history.replace('/');
-  }, [value]);
+  }, [description, resolution, shortId]);
 
   const extraButtons = useMemo(
     () => [
@@ -61,16 +83,39 @@ const CardDetailsModal = ({
       submitTitle="Update"
     >
       <div className={classes.root}>
-        <TextField
-          multiline
-          autoFocus
-          fullWidth
-          rows={12}
-          label="Description"
-          onChange={changeHandler}
-          variant="outlined"
-          value={value}
-        />
+        <div className={classes.inputs}>
+          <TextField
+            autoFocus
+            fullWidth
+            label="Short ID"
+            onChange={shortIdChangeHandler}
+            variant="outlined"
+            value={shortId}
+          />
+
+          <TextField
+            multiline
+            autoFocus
+            fullWidth
+            rows={6}
+            label="Description"
+            onChange={descriptionChangeHandler}
+            variant="outlined"
+            value={description}
+          />
+
+          <TextField
+            multiline
+            autoFocus
+            fullWidth
+            rows={6}
+            label="Resolution"
+            onChange={resolutionChangeHandler}
+            variant="outlined"
+            value={resolution}
+          />
+        </div>
+
         <div className={classes.historyContainer}>
           <LogEventTimeline logEvents={card.logRecords} />
         </div>

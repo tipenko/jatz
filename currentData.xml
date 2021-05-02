@@ -2,8 +2,9 @@
 <board>
   <column name="todo">
     <card uid="1618764996274">
-      <content>atodo
-</content>
+      <content>atodo</content>
+      <shortId>genericId</shortId>
+      <resolution>generic resolution</resolution>
       <logRecord time="1618764996274" type="finishAddCard">
         <extra>todo</extra>
       </logRecord>
@@ -11,8 +12,9 @@
   </column>
   <column name="blocked">
     <card uid="1618765013544">
-      <content>ablocked
-</content>
+      <content>ablocked</content>
+      <shortId>genericId</shortId>
+      <resolution>generic resolution</resolution>
       <logRecord time="1618765013544" type="finishAddCard">
         <extra>blocked</extra>
       </logRecord>
@@ -21,6 +23,8 @@
   <column name="in progress">
     <card uid="1619951324027">
       <content>yuri gagarin</content>
+      <shortId>genericId</shortId>
+      <resolution>gagarin has special resolution</resolution>
       <logRecord time="1619951324027" type="finishAddCard">
         <extra>in progress</extra>
       </logRecord>
@@ -34,9 +38,14 @@
         <extra>in progress</extra>
         <extra>1</extra>
       </logRecord>
+      <logRecord time="1619988206641" type="updateCard">
+        <extra>yuri gagarin</extra>
+      </logRecord>
     </card>
     <card uid="1619982954985">
       <content>task in progress</content>
+      <shortId>genericId</shortId>
+      <resolution>generic resolution</resolution>
       <logRecord time="1619982954985" type="finishAddCard">
         <extra>in progress</extra>
       </logRecord>
@@ -44,14 +53,17 @@
   </column>
   <column name="done">
     <card uid="1618765032059">
-      <content>adone
-</content>
+      <content>adone</content>
+      <shortId>genericId</shortId>
+      <resolution>generic resolution</resolution>
       <logRecord time="1618765032059" type="finishAddCard">
         <extra>done</extra>
       </logRecord>
     </card>
     <card uid="1618765023857">
       <content>ainprogress</content>
+      <shortId>genericId</shortId>
+      <resolution>generic resolution</resolution>
       <logRecord time="1618765023857" type="finishAddCard">
         <extra>in progress</extra>
       </logRecord>
@@ -65,6 +77,8 @@
   <column name="archived">
     <card uid="1619952928130">
       <content>leonid volkvo</content>
+      <shortId>genericId</shortId>
+      <resolution>generic resolution</resolution>
       <logRecord time="1619952928130" type="finishAddCard">
         <extra>in progress</extra>
       </logRecord>
@@ -86,6 +100,8 @@
     </card>
     <card uid="1618765037492">
       <content>aarchived</content>
+      <shortId>genericId</shortId>
+      <resolution>generic resolution</resolution>
       <logRecord time="1618765037492" type="finishAddCard">
         <extra>done</extra>
       </logRecord>
@@ -97,6 +113,8 @@
     </card>
     <card uid="8">
       <content>eight</content>
+      <shortId>genericId</shortId>
+      <resolution>generic resolution</resolution>
       <logRecord time="1616961591630" type="finishAddCard">
         <extra>in progress</extra>
       </logRecord>

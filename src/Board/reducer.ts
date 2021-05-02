@@ -67,7 +67,7 @@ export default (state = defaultState, { type, payload, eventLogRecord }) => {
       return nextState;
 
     case UPDATE_CARD:
-      const { cardUid, nextContent } = payload;
+      const { cardUid, nextContent, nextShortId, nextResolution } = payload;
 
       const updatedState = state.map((column) => {
         const cardToMutate = find(column.cards, (card) => card.uid == cardUid);
@@ -77,7 +77,7 @@ export default (state = defaultState, { type, payload, eventLogRecord }) => {
           cards: replaceCard(
             column.cards,
             cardToMutate,
-            add(new CardObject(cardToMutate.uid, nextContent, cardToMutate.logRecords))
+            add(new CardObject(cardToMutate.uid, nextShortId, nextResolution, nextContent, cardToMutate.logRecords))
           ),
         };
       });
@@ -115,7 +115,7 @@ export default (state = defaultState, { type, payload, eventLogRecord }) => {
 
         return {
           name: column.name,
-          cards: column.cards.concat(new CardObject(addingUid, addingContent, [eventLogRecord])),
+          cards: column.cards.concat(new CardObject(addingUid, null, null, addingContent, [eventLogRecord])),
         };
       });
       return addedState;

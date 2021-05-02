@@ -11,11 +11,21 @@ import { MOVE_CARD } from '../Board/actionTypes';
 export default class CardObject {
   uid: string;
   content: string;
+  shortId: string;
+  resolution: string;
   logRecords: any[];
 
-  constructor(uid: string, content: string, logRecords: any[] = []) {
+  constructor(
+    uid: string,
+    shortId: string,
+    resolution: string,
+    content: string,
+    logRecords: any[] = []
+  ) {
     this.uid = uid;
     this.content = content || uid;
+    this.shortId = shortId;
+    this.resolution = resolution;
     this.logRecords = logRecords;
   }
 
@@ -70,7 +80,7 @@ export default class CardObject {
 }
 
 export const addLogRecord = (logRecord: any) => (card: CardObject) => {
-  const { uid, content, logRecords: oldLogRecords } = card;
+  const { uid, content, shortId, resolution, logRecords: oldLogRecords } = card;
   const logRecords = [...oldLogRecords, logRecord];
-  return new CardObject(uid, content, logRecords);
+  return new CardObject(uid, shortId, resolution, content, logRecords);
 };

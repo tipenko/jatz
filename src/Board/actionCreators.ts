@@ -20,10 +20,15 @@ export const moveCard = _r(MOVE_CARD, (card, source, target, index) => ({
   index,
 }));
 
-export const updateCard = _r(UPDATE_CARD, (cardUid, nextContent) => ({
-  cardUid,
-  nextContent,
-}));
+export const updateCard = _r(
+  UPDATE_CARD,
+  (cardUid, nextContent, nextResolution, nextShortId) => ({
+    cardUid,
+    nextContent,
+    nextResolution,
+    nextShortId
+  })
+);
 
 export const deleteCard = _r(DELETE_CARD, (cardUid) => ({
   cardUid,

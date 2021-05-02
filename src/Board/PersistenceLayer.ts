@@ -24,8 +24,12 @@ export const load = (setInitialState) => {
             const name = column['$']['name'];
             const cardsFromXml = column['card'];
             const cards = map(cardsFromXml, (cardItem) => {
+              debugger;
               const uid = cardItem['$']['uid'];
               const textContent = cardItem['content'][0];
+              const shortId = cardItem['shortId'][0];
+              const resolution = cardItem['resolution'][0];
+
               const logRecordsFromXml = cardItem['logRecord'];
               const logRecords = map(logRecordsFromXml, (logRecord) => {
                 const time = logRecord['$']['time'] - 0;
@@ -34,7 +38,7 @@ export const load = (setInitialState) => {
                 return new LogEvent(time, type, extrasFromXml);
               });
 
-              return new CardObject(uid, textContent, logRecords);
+              return new CardObject(uid, shortId, resolution, textContent, logRecords);
             });
 
             return {
@@ -55,8 +59,10 @@ export const save = (dispatch, getState) => {
     board: {
       column: map(columns, ({ name, cards }) => ({
         $: { name },
-        card: map(cards, ({ uid, content, logRecords }) => ({
+        card: map(cards, ({ uid, content, shortId, resolution, logRecords }) => ({
           content: [{ _: content }],
+          shortId: [{ _: shortId }],
+          resolution: [{ _: resolution }],
           $: { uid },
           logRecord: map(logRecords, ({ time, type, extras }) => ({
             $: { time, type },
@@ -72,7 +78,6 @@ export const save = (dispatch, getState) => {
   const xml = builder.buildObject(savingObject);
   fs.writeFile('./currentData.xml', xml, (err) => {
     if (err) {
-      debugger;
       console.log('an error happened', err);
     }
   });
