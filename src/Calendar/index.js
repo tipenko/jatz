@@ -78,22 +78,17 @@ const addDays = (days, date) =>
 
 const addWeek = (date, weekCount = 1) => addDays(7 * weekCount, date);
 
-const cardArrayToSingularCardReference = (start, end) => (cards) =>
-  reduce(
-    cards,
-    (accumulator, card) => {
-      const rangesThatRelateToToday = filter(card.workingPeriodsTimes, (pair) =>
-        checkPairInRange(start, end, pair)
-      );
-      const singularRefs = map(rangesThatRelateToToday, (range) => ({
-        range,
-        card,
-      }));
+const cardArrayToArrayWithMatchingRanges = (start, end) => (cards) =>
+  map(cards, (card) => {
+    const rangesThatRelateToToday = filter(card.workingPeriodsTimes, (pair) =>
+      checkPairInRange(start, end, pair)
+    );
 
-      return [...accumulator, ...singularRefs];
-    },
-    []
-  );
+    return {
+      ranges: rangesThatRelateToToday,
+      card,
+    };
+  });
 
 const Cal = ({ allCards, columns, setInitialState }) => {
   const { renderDrawer, open } = useDrawer();
@@ -125,11 +120,14 @@ const Cal = ({ allCards, columns, setInitialState }) => {
       const dayStart = addDays(index, startingMoment);
       const dayEnd = addDays(index + 1, startingMoment);
       const check = checkCardInRange(dayStart, dayEnd);
-      const toRefs = cardArrayToSingularCardReference(dayStart, dayEnd);
+      const onlyTodaysRanges = cardArrayToArrayWithMatchingRanges(
+        dayStart,
+        dayEnd
+      );
       return {
         name,
         index,
-        refs: toRefs(filter(thisWeekCards, check)),
+        rangesCardPairs: onlyTodaysRanges(filter(thisWeekCards, check)),
       };
     });
   }, [thisWeekCards]);
@@ -182,21 +180,29 @@ const Cal = ({ allCards, columns, setInitialState }) => {
           </ButtonGroup>
         </Paper>
 
-        {eventColumns.map(({ name, index, refs }) => (
+        {eventColumns.map(({ name, index, rangesCardPairs }) => (
           <Paper className="calendar-column">
             <Typography variant="subtitle1">{name}</Typography>
-            {refs.map(({ range, card }, index) => (
-              <div className="calendar-event">
-                <Typography variant="caption"
-                component={RouterLink}
-                to={`/kanban/cardDetails/${card.uid}`}
-                >
-                {withTitle( `${formatTime(new Date(range[0]))}-${formatTime(
-                    new Date(range[1])
-                  )} ${card.content}` )}
-          </Typography>
-              </div>
-            ))}
+            {rangesCardPairs.map(({ ranges, card }, index) => {
+              const times = map(
+                ranges,
+                ([start, end]) =>
+                  `${formatTime(new Date(start))}-${formatTime(new Date(end))}`
+              );
+              const timesStr = times.join(',');
+
+              return (
+                <div className="calendar-event">
+                  <Typography
+                    variant="caption"
+                    component={RouterLink}
+                    to={`/kanban/cardDetails/${card.uid}`}
+                  >
+                    {withTitle(`${timesStr} ${card.content}`)}
+                  </Typography>
+                </div>
+              );
+            })}
           </Paper>
         ))}
       </div>

@@ -54,9 +54,6 @@ export default class CardObject {
         currentPair = [record.time];
         inProgressState = true;
       } else if (record.isInProgressEndRecord) {
-        if (!currentPair) {
-          debugger;
-        }
         currentPair[1] = record.time;
         result.push(currentPair);
         inProgressState = false;
@@ -64,9 +61,6 @@ export default class CardObject {
     });
 
     if (inProgressState) {
-      if (!currentPair) {
-        debugger;
-      }
       currentPair[1] = getTime();
       result.push(currentPair);
     }
