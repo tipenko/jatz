@@ -33,8 +33,8 @@ const CardDetailsModal = ({
   deleteCard,
 }) => {
   const [description, setDescription] = useState(card && card.content);
-  const [shortId, setShortId] = useState(card && card.shortId);
-  const [resolution, setResolution] = useState(card && card.resolution);
+  const [shortId, setShortId] = useState(card && card.shortId || "");
+  const [resolution, setResolution] = useState(card && card.resolution || "");
 
   const descriptionChangeHandler = useCallback(
     withChangeListener(setDescription),

@@ -25,7 +25,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
-import useDrawer from '../Drawer';
+import Nav from '../Nav';
 import generateTime from '../utils/generateTime';
 import withTitle from '../utils/withTitle';
 import { formatDate, formatTime } from '../utils/formatDate';
@@ -91,7 +91,6 @@ const cardArrayToArrayWithMatchingRanges = (start, end) => (cards) =>
   });
 
 const Cal = ({ allCards, columns, setInitialState }) => {
-  const { renderDrawer, open } = useDrawer();
   const classes = useStyles();
   const lastMonday = startOfWeek(new Date(generateTime()));
   const [startingMoment, setSm] = useState(lastMonday);
@@ -142,22 +141,13 @@ const Cal = ({ allCards, columns, setInitialState }) => {
     <Fragment>
       <AppBar position="static">
         <Toolbar variant="dense">
-          {renderDrawer()}
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            className={classes.menuButton}
-            onClick={open}
-          >
-            <MenuIcon />
-          </IconButton>
+          <Nav />
           <Typography variant="h6" className={classes.title}>
             Task calendar
           </Typography>
         </Toolbar>
       </AppBar>
-      <div class="calendar-grid">
+      <div className="calendar-grid">
         <Paper className="calendar-header">
           <Typography variant="h5">
             {formatDate(startingMoment)} - {formatDate(endingMoment)}

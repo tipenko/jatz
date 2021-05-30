@@ -73,6 +73,17 @@
         <extra>1</extra>
       </logRecord>
     </card>
+    <card uid="1619992672587">
+      <content>sdfasd</content>
+      <shortId>sd</shortId>
+      <resolution>d</resolution>
+      <logRecord time="1619992672587" type="finishAddCard">
+        <extra>done</extra>
+      </logRecord>
+      <logRecord time="1619992677080" type="updateCard">
+        <extra>sdfasd</extra>
+      </logRecord>
+    </card>
   </column>
   <column name="archived">
     <card uid="1619952928130">

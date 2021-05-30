@@ -24,7 +24,6 @@ export const load = (setInitialState) => {
             const name = column['$']['name'];
             const cardsFromXml = column['card'];
             const cards = map(cardsFromXml, (cardItem) => {
-              debugger;
               const uid = cardItem['$']['uid'];
               const textContent = cardItem['content'][0];
               const shortId = cardItem['shortId'][0];

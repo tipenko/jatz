@@ -1,15 +1,13 @@
-import React, { Fragment, useEffect, useCallback, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setInitialState } from './actionCreators';
 import { save } from './PersistenceLayer';
 import { Column } from './Column';
-import useDrawer from '../Drawer';
+import Nav from '../Nav';
 import { load } from './PersistenceLayer';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import constant from 'lodash/constant';
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,22 +30,11 @@ const BoardComponent = ({ columns, setInitialState, save }) => {
 
   const classes = useStyles();
 
-  const { renderDrawer, open } = useDrawer();
-
   return (
     <Fragment>
       <AppBar position="static">
         <Toolbar variant="dense">
-          {renderDrawer()}
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            className={classes.menuButton}
-            onClick={open}
-          >
-            <MenuIcon />
-          </IconButton>
+          <Nav />
           <Typography variant="h6" className={classes.title}>
             Kanban Board
           </Typography>
