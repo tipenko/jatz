@@ -29,6 +29,7 @@ import Nav from '../Nav';
 import generateTime from '../utils/generateTime';
 import withTitle from '../utils/withTitle';
 import { formatDate, formatTime } from '../utils/formatDate';
+import AddLRButton from '../LogRecords/AddButton';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -142,6 +143,7 @@ const Cal = ({ allCards, columns, setInitialState }) => {
       <AppBar position="static">
         <Toolbar variant="dense">
           <Nav />
+          <AddLRButton/>
           <Typography variant="h6" className={classes.title}>
             Task calendar
           </Typography>

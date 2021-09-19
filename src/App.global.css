@@ -95,3 +95,9 @@ body {
   text-decoration: none;
   color: white;
 }
+
+.addLogRecord {
+  position:  fixed;
+  bottom:  50px;
+  right:  50px;
+}

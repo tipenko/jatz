@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import constant from 'lodash/constant';
+import AddLRButton from '../LogRecords/AddButton';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,7 @@ const BoardComponent = ({ columns, setInitialState, save }) => {
       <AppBar position="static">
         <Toolbar variant="dense">
           <Nav />
+          <AddLRButton/>
           <Typography variant="h6" className={classes.title}>
             Kanban Board
           </Typography>

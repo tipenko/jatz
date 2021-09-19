@@ -7,13 +7,15 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import CardDetailsModal from './CardDetailsModal';
 import AddCardModal from './AddCardModal';
+import AddLogRecordModal from './AddLogRecordModal';
 
-const ModalsComponent = ({ state, addingCard }) => {
+const ModalsComponent = ({ addingCard, addingLogRecord }) => {
   const isAdding = !isEmpty(addingCard);
 
   return (
     <Fragment>
       {isAdding && <AddCardModal columnName={addingCard.addingToColumn} />}
+      {addingLogRecord && <AddLogRecordModal />}
       <Router>
         <Route
           path="*/cardDetails/:cardId"
@@ -27,8 +29,9 @@ const ModalsComponent = ({ state, addingCard }) => {
 };
 
 export default connect(
-  ({ modals: { addingCard } }) => ({
+  ({ modals: { addingCard, addingLogRecord } }) => ({
     addingCard,
+    addingLogRecord
   }),
   null
 )(ModalsComponent);

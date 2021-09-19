@@ -1,5 +1,4 @@
-import React, { Fragment, useMemo, useState, useCallback } from 'react';
-import map from 'lodash/map';
+import React, { Fragment, useMemo } from 'react';
 import sortBy from 'lodash/sortBy';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
